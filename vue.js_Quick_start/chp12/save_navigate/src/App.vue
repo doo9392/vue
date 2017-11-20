@@ -37,12 +37,29 @@
 			{
 				path : '/contacts', name : 'contacts', component : Contacts,
 				children : [
-					{path : ':no', name : 'contactbyno', component : ContactByNo}
+					{
+						path : ':no', name : 'contactbyno', component : ContactByNo,
+						beforeEnter : (to, from, next) => {
+							console.log("@@ beforeEnter :" + from.path + "-->" + to.path);
+							
+							next();
+						}
+					}
 				]
 			}
 		]
 	});
-
+	
+	router.beforeEach((to, from, next) => {
+		console.log("@@ beforeEach!");
+		
+		next();
+	});
+	
+	router.afterEach((to, from) => {
+		console.log("@@ afterEach");
+	});
+	
 	export default {
 		name : 'app',
 		router
