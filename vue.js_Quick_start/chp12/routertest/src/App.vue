@@ -1,24 +1,24 @@
 <template>
-<div>
-	<div class="header">
-		<h1 class="headerText">(주)OpenSG</h1>
-		<nav>
-			<ul>
-				<li>
-					<router-link to="/home">Home</router-link>
-	</li>
-				<li>
-					<router-link to="/about">About</router-link>
-	</li>
-				<li>
-					<router-link to="/contacts">Contacts</router-link>
-	</li>
-	</ul>
-	</nav>
-	</div>
-	<div class="container">
-		<router-view></router-view>
-	</div>
+	<div>
+		<div class="header">
+			<h1 class="headerText">(주)OpenSG</h1>
+			<nav>
+				<ul>
+					<li>
+						<router-link to="/home">Home</router-link>
+					</li>
+					<li>
+						<router-link to="/about">About</router-link>
+					</li>
+						<li>
+						<router-link to="/contacts">Contacts</router-link>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="container">
+			<router-view></router-view>
+		</div>
 	</div>
 </template>
 
@@ -26,7 +26,6 @@
 	import Home from './components/Home.vue';
 	import About from './components/About.vue';
 	import Contacts from './components/Contacts.vue';
-	import ContactByNo from './components/ContactByNo.vue';
 	import VueRouter from 'vue-router';
 
 	const router = new VueRouter({
@@ -34,12 +33,7 @@
 			{path : '/', component : Home},
 			{path : '/home', component : Home},
 			{path : '/about', component : About},
-			{
-				path : '/contacts', component : Contacts,
-				children : [
-					{path : ':no', component : ContactByNo}
-				]
-			}
+			{path : '/contacts', component : Contacts}
 		]
 	});
 
