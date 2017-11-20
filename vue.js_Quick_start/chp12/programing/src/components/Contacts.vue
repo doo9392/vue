@@ -25,7 +25,7 @@
 		methods : {
 			navigate : function(no){
 				if(confirm('상세 정보를 보시겠습니까?')){
-					console.log('/contacts/' + no + '로 이동완료');
+					console.log('/contacts/' + no + '로 이동완료!');
 				}
 			}
 		}
