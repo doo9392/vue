@@ -1,24 +1,24 @@
 <template>
-<div>
-	<div class="header">
-		<h1 class="headerText">(주)OpenSG</h1>
-		<nav>
-			<ul>
-				<li>
-					<router-link :to="{name:'home'}">Home</router-link>
-	</li>
-				<li>
-					<router-link :to="{name:'about'}">About</router-link>
-	</li>
-				<li>
-					<router-link :to="{name:'contacts'}">Contacts</router-link>
-	</li>
-	</ul>
-	</nav>
-	</div>
-	<div class="container">
-		<router-view></router-view>
-	</div>
+	<div>
+		<div class="header">
+			<h1 class="headerText">(주)OpenSG</h1>
+			<nav>
+				<ul>
+					<li>
+						<router-link :to="{name:'home'}">Home</router-link>
+					</li>
+					<li>
+						<router-link :to="{name:'about'}">About</router-link>
+					</li>
+					<li>
+						<router-link :to="{name:'contacts'}">Contacts</router-link>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="container">
+			<router-view></router-view>
+		</div>
 	</div>
 </template>
 
@@ -42,7 +42,8 @@
 						beforeEnter : (to, from, next) => {
 							console.log("@@ beforeEnter :" + from.path + "-->" + to.path);
 							
-							next();
+							if(from.path.startsWith("/contacts")) next();
+							else next("/home");
 						}
 					}
 				]
