@@ -33,11 +33,30 @@
 
 	const router = new VueRouter({
 		routes : [
-			{path : '/', components : {default : Title, info : Home}},
-			{path : '/home', name : 'home', redirect : {name : 'about'}, components : {default : Title, info : Home}},
-			{path : '/about', name : 'about', components : {default : Title, info : About}},
 			{
-				path : '/contacts', name : 'contacts', components : {default : Title, info : Contacts},
+				path : '/',
+				components : {
+					default : Title, info : Home
+				}
+			},
+			{
+				path : '/home', name : 'home',
+				redirect : {name : 'about'},
+				components : {
+					default : Title, info : Home
+				}
+			},
+			{
+				path : '/about', name : 'about',
+				components : {
+					default : Title, info : About
+				}
+			},
+			{
+				path : '/contacts', name : 'contacts',
+				components : {
+					default : Title, info : Contacts
+				},
 				children : [
 					{path : ':no', name : 'contactbyno', component : ContactByNo}
 				]
