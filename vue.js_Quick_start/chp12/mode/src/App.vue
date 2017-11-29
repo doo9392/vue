@@ -64,7 +64,7 @@
 		console.log("@@ afterEach");
 		
 		if(to.name === undefined){
-			alert('존재하지 않는 페이지입니다.');
+			//alert('존재하지 않는 페이지입니다.');
 		}
 	});
 	
