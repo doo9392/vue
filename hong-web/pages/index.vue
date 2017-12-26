@@ -5,13 +5,7 @@
 </template>
 
 <script>
-	import Header from '~/components/Header.vue'
-
-	export default {
-		components: {
-			Header
-		}
-	}
+	import Header from '../components/Header.vue'
 </script>
 
 <style module>
