@@ -1,0 +1,128 @@
+[
+    {
+        "name" : "HETREGO",
+        "img" : "hetrego.png",
+        "link" : "http://hetregokorea.com/",
+        "compony" : "(주)doa",
+        "type" : "패션 브랜드",
+        "management" : true,
+        "production" : true
+    },
+    {
+        "name" : "Thursday Island",
+        "img" : "thursdayisland.png",
+        "link" : "http://www.thursdayisland.com/",
+        "compony" : "(주)doa",
+        "type" : "패션 브랜드",
+        "management" : true,
+        "production" : false
+    },
+    {
+        "name" : "T.I.FOR_MEN",
+        "img" : "T.I.FOR_MEN.png",
+        "link" : "http://www.tiformen.com/",
+        "compony" : "(주)doa",
+        "type" : "패션 브랜드",
+        "management" : true,
+        "production" : false
+    },
+    {
+        "name" : "SHESMISS",
+        "img" : "shesmiss.png",
+        "link" : "http://www.shesmiss.co.kr/",
+        "compony" : "(주)doa",
+        "type" : "패션 브랜드",
+        "management" : true,
+        "production" : true
+    },
+    {
+        "name" : "MICHAELKORS Destination Kors",
+        "img" : "mk_destination.png",
+        "link" : "http://destinationkors.michaelkors.co.kr/",
+        "compony" : "(주)doa",
+        "type" : "프로모션 사이트",
+        "management" : true,
+        "production" : true
+    },
+    {
+        "name" : "CELLTRION SKINCURE",
+        "img" : "celltrionskincure.png",
+        "link" : "http://celltrionskincure.com/",
+        "compony" : "(주)doa",
+        "type" : "화장품 브랜드",
+        "management" : true,
+        "production" : false
+    },
+    {
+        "name" : "1박2일",
+        "img" : "2d1n.png",
+        "link" : "http://2d1n.co.kr/",
+        "compony" : "(주)doa",
+        "type" : null,
+        "management" : true,
+        "production" : false
+    },
+    {
+        "name" : "TNGT",
+        "img" : "tngt.png",
+        "link" : "http://www.tngt.co.kr/",
+        "compony" : "(주)doa",
+        "type" : "패션 브랜드",
+        "management" : true,
+        "production" : false
+    },
+    {
+        "name" : "HUM-HUM",
+        "img" : "hum-hum.png",
+        "link" : "http://www.hum-hum.com/",
+        "compony" : "(주)doa",
+        "type" : "패션 브랜드",
+        "management" : true,
+        "production" : false
+    },
+    {
+        "name" : "rrig",
+        "img" : "rrig.png",
+        "link" : "http://rrig.co.kr/",
+        "compony" : "(주)doa",
+        "type" : "패션 브랜드",
+        "management" : true,
+        "production" : false
+    },
+    {
+        "name" : "SPECTRUN",
+        "img" : "spectrun.png",
+        "link" : "http://spectrun.co.kr/",
+        "compony" : "(주)doa",
+        "type" : "프로모션 사이트",
+        "management" : true,
+        "production" : true
+    },
+    {
+        "name" : "MARCBRICK",
+        "img" : "marcbrick.png",
+        "link" : "http://marcbrick.co.kr/",
+        "compony" : "(주)doa",
+        "type" : "패션 브랜드",
+        "management" : true,
+        "production" : false
+    },
+    {
+        "name" : "yido pottery",
+        "img" : "yidopottery.png",
+        "link" : "http://yidopottery.com/",
+        "compony" : "(주)doa",
+        "type" : null,
+        "management" : true,
+        "production" : false
+    },
+    {
+        "name" : "형지 I&C",
+        "img" : "hyngjiinc.png",
+        "link" : "http://hyungjiinc.com/",
+        "compony" : "(주)doa",
+        "type" : "패션 브랜드",
+        "management" : true,
+        "production" : true
+    }
+]
