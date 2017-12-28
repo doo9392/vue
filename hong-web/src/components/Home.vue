@@ -30,17 +30,26 @@
 			<img src="/img/main/contact_bg.jpg" alt="">
 			<div>
 				<h2>Contact</h2>
-				<form action="/_CONTACT/CONTACT.php">
+				<form action="/_CONTACT/CONTACT.php" method="post">
 					<table>
 						<tr>
-							-
+							<input type="text" name="title">
+						</tr>
+						<tr>
+							<input type="text" name="content">
+						</tr>
+						<tr>
+							<input type="text" name="img">
+						</tr>
+						<tr>
+							<input type="submit">
 						</tr>
 					</table>
 				</form>
 			</div>
-			<p>
+			<!-- <p>
 				<span>준비중입니다.</span>
-			</p>
+			</p> -->
     	</div>
 	</div>
 </template>
