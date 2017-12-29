@@ -9,7 +9,7 @@
 	import list from './components/list.vue';
 	import btn from './components/btn.vue';
 	import eventBus from './EventBus.js';
-	
+
 	export default {
 		name: 'App',
 		data : function(){

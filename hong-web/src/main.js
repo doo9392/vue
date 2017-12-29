@@ -10,6 +10,7 @@ require('es6-promise').polyfill();
 
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
+Vue.config.devtools = true;
 
 /* eslint-disable no-new */
 new Vue({
