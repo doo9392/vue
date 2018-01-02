@@ -11,16 +11,34 @@
 				<router-link :to="{name:'QnA'}">QnA</router-link>
 			</li>
 		</ul>
+		<div :class="$style.mobileBtn" @click="btnOn">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div :class="$style.mobildMenu">
+			<ul :class="$style.list">
+				<li>
+					<router-link :to="{name:'Introduce'}">Introduce</router-link>
+				</li>
+				<li>
+					<router-link :to="{name:'Portfolio'}">Portfolio</router-link>
+				</li>
+				<li>
+					<router-link :to="{name:'QnA'}">QnA</router-link>
+				</li>
+			</ul>
+		</div>
 		<router-link :class="$style.logo" :to="{name:'Home'}">
 			<img src="/img/com/logo_white.png" alt="LOGO">
 		</router-link>
 		<ul :class="$style.sign">
 			<li>
-				<span v-if="!signCurrent" @click="SignPopOpen('in')">Sign In</span>
+				<span v-if="!signCurrent" @click.prevent="SignPopOpen('in')">Sign In</span>
 				<span v-if="signCurrent">Test</span>
 			</li>
 			<li>
-				<span v-if="!signCurrent" @click="SignPopOpen('up')">Sign Up</span>
+				<span v-if="!signCurrent" @click.prevent="SignPopOpen('up')">Sign Up</span>
 				<form v-if="signCurrent" action="/_SIGN/SIGN_OUT.php" method="post">
 					<input type="submit" value="Sign Out">
 				</form>
@@ -103,6 +121,7 @@
 
 	export default {
 		name: 'Header',
+		props : ["signCurrent"],
 		data () {
 			return {
 				pop : false,
@@ -122,17 +141,9 @@
 			}
 		},
 		mounted : function() {
-			this.$axios.get('http://hong-web.com/_SIGN/SIGN_API.php').then((response) => {
+			this.$axios.get('http://hong-web.com/_SIGN/NAME_API.php').then((response) => {
 				this.nicknameList = response.data;
 			});
-
-			var Cookie = document.cookie;
-
-			if(Cookie.indexOf('PHPSESSID') === 0) {
-				this.signCurrent = true;
-			} else {
-				this.signCurrent = false;
-			}
 		},
 		watch : {
 			email : function(v){
@@ -174,9 +185,23 @@
 				var KeyCode = /[~!@\#$%^&*\()\-=+']/g;
 				var KeyCodeCheck = KeyCode.test(v);
 
+				var overlap = false;
+
+				this.nicknameList.map(function(i){
+					if(i.nickname == v.trim()) {
+						overlap = true;
+					}
+				});
+
+
 				if(!KeyCodeCheck) {
 					if(v.trim().length >= 4 && v.trim().length <= 10) {
-						this.Error.nickname.current = false;
+						if(!overlap) {
+							this.Error.nickname.current = false;
+						} else {
+							this.Error.nickname.value = '중복되는 닉네임이 있습니다.';
+							this.Error.nickname.current = true;
+						}
 					} else if (v.trim().length > 10) {
 						this.Error.nickname.value = '10자리 이하로 입력하세요.';
 						this.Error.nickname.current = true;
@@ -191,6 +216,9 @@
 			}
 		},
 		methods : {
+			btnOn : function(e){
+				console.log(e);
+			},
 			SignPopOpen : function(type) {
 				this.pop = true;
 
@@ -254,11 +282,14 @@
 	.header .menu>li:last-child {margin-right:0; padding-right:0;}
 	.header .menu>li:last-child:after {display:none;}
 
+	.header .mobileBtn {display:none;}
+	.header .mobildMenu {display:none;}
+
 	.header .sign {float:right; overflow:hidden; margin-right:40px;}
 	.header .sign>li {float:left; line-height:55px; margin-left:20px; padding-left:20px; position:relative; letter-spacing:1.5px;}
 	.header .sign>li>span {color:#fff; font-size:18px; cursor:pointer;}
 	.header .sign>li>span:hover {text-decoration:underline;}
-	.header .sign>li input {color:#fff; font-size:18px; cursor:pointer;}
+	.header .sign>li input {color:#fff; font-size:18px; cursor:pointer; background-color:transparent; border:0;}
 	.header .sign>li input:hover {text-decoration:underline;}
 	.header .sign>li:after {content:""; position:absolute; display:block; height:18px; width:1px; background-color:#fff; left:0; top:50%; transform:translateY(-50%);}
 	.header .sign>li:first-child {margin-left:0; padding-left:0;}
@@ -269,15 +300,50 @@
 	.header .signPop div>h2 {text-align:center; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid #222;}
 	.header .signPop div form {width:100%; text-align:center; overflow:hidden;}
 	.header .signPop div form table {text-align:left; width:100%; margin-bottom:10px;}
-	.header .signPop div form table tr th {width:25%; text-align:right; padding-right:15px;}
+	.header .signPop div form table tr th {width:25%; text-align:right; padding-right:15px; font-size:16px;}
 	.header .signPop div form table tr td {padding-bottom:10px;}
-	.header .signPop div form table tr td input {width:100%; border-radius:5px;}
-	.header .signPop div form table tr td i {color:#f30; font-size:12px;}
+	.header .signPop div form table tr td input {width:100%; border-radius:5px; font-size:16px;}
+	.header .signPop div form table tr td i {color:#f30; font-size:14px;}
 	.header .signPop div.signup form table tr:first-child td input {width:40%;}
-	.header .signPop div.signup form table tr:first-child td span {display:inline-block; width:5%; text-align:center;}
-	.header .signPop div.signup form table tr:first-child td select {width:53.2%; border-radius:5px; font-size:15px;}
-	.header .signPop div form>input.cancel {display:block; width:100%; height:40px; background-color:#fff; box-sizing:border-box; cursor:pointer; line-height:40px; border:1px solid #e0e3e8; border-radius:5px; margin-bottom:10px;}
-	.header .signPop div form>input.submit {width:100%; height:40px; background-color:#fff; border:0; cursor:pointer; background-color:#e0e3e8; border-radius:5px;}
+	.header .signPop div.signup form table tr:first-child td span {display:inline-block; width:5%; text-align:center; font-size:20px;}
+	.header .signPop div.signup form table tr:first-child td select {width:53%; border-radius:5px; font-size:16px; float:right;}
+	.header .signPop div form>input.cancel {display:block; width:100%; height:40px; background-color:#fff; box-sizing:border-box; cursor:pointer; line-height:40px; border:1px solid #e0e3e8; border-radius:5px;}
+	.header .signPop div form>input.submit {width:100%; height:40px; background-color:#fff; border:0; cursor:pointer; background-color:#e0e3e8; border-radius:5px; margin-bottom:10px;}
 	.header .signPop div ul {margin-top:20px; padding-top:10px; border-top:1px solid #222;}
-	.header .signPop div ul li {list-style:inside; font-size:14px;}
+	.header .signPop div ul li {list-style:inside; font-size:16px;}
+
+	@media screen and (max-width:800px) {
+		.header {height:13vw;}
+		.header .logo img {width:8vw;}
+
+		.header .menu {display:none;}
+
+		.header .mobileBtn {display:block; position:absolute; left:5vw; top:50%; transform:translateY(-50%); border:2px solid #fff; width:8vw; height:8vw; border-radius:1vw; box-sizing:border-box;}
+		.header .mobileBtn span {width:70%; height:13%; background-color:#fff; position:absolute; left:50%; transform-origin:center;}
+		.header .mobileBtn span:nth-child(1) {top:50%; transform:translate(-50%, 170%);}
+		.header .mobileBtn span:nth-child(2) {top:50%; transform:translate(-50%, -50%);}
+		.header .mobileBtn span:nth-child(3) {top:50%; transform:translate(-50%, -270%);}
+		.header .mobildMenu {position:fixed; display:none; left:0; top:0; width:100%; height:100%; background-color:#222;}
+
+		.header .sign {margin-right:5vw;}
+		.header .sign>li {line-height:13vw; margin-left:1.5vw; padding-left:2vw;}
+		.header .sign>li>span {font-size:3vw;}
+		.header .sign>li input {font-size:3vw;}
+		.header .sign>li:after {height:3vw;}
+
+		.header .signPop div {width:90vw; padding:2.5vw;}
+		.header .signPop div>h2 {margin-bottom:1.5vw; padding-bottom:1.5vw;}
+		.header .signPop div form table {text-align:left; width:100%; margin-bottom:1.5vw;}
+		.header .signPop div form table tr th {width:23%; padding-right:1.875vw; font-size:2.3vw;}
+		.header .signPop div form table tr td {padding-bottom:1.5vw;}
+		.header .signPop div form table tr td input {border-radius:0.8vw; font-size:3vw; height:8vw; line-height:8vw;}
+		.header .signPop div form table tr td i {font-size:2vw;}
+		.header .signPop div.signup form table tr:first-child td input {width:40%;}
+		.header .signPop div.signup form table tr:first-child td span {width:5%; font-size:3vw;}
+		.header .signPop div.signup form table tr:first-child td select {width:50%; border-radius:0.8vw; font-size:3vw; height:8vw; line-height:8vw;}
+		.header .signPop div form>input.cancel {height:12vw; line-height:5vw; border-radius:0.8vw; font-size:5vw;}
+		.header .signPop div form>input.submit {height:12vw; border-radius:0.8vw; margin-bottom:1.5vw; font-size:5vw;}
+		.header .signPop div ul {margin-top:2.5vw; padding-top:1.5vw; margin-bottom:2vw;}
+		.header .signPop div ul li {font-size:3vw;}
+	}
 </style>
