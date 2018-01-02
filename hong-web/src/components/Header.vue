@@ -151,7 +151,7 @@
 				var KeyCodeCheck = KeyCode.test(v);
 
 				if(!KeyCodeCheck) {
-					if(v == "") {
+					if(v.trim() == "") {
 						this.Error.email.current = true;
 					this.Error.email.value = 'e-mail을 입력해주세요.';
 					} else {
