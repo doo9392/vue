@@ -17,6 +17,6 @@
 <style module>
     .NotFound {text-align:center;}
     .NotFound p {font-size:35px; line-height:70px; margin:150px 0 100px;}
-    .NotFound a {font-size:20px;}
+    .NotFound a {font-size:20px; margin-bottom:150px;}
     .NotFound a:hover {text-decoration:underline;}
 </style>

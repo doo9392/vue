@@ -3,15 +3,26 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import ES6Promise from 'es6-promise';
 
+import Constant from '../Constant';
+
 ES6Promise.polyfill();
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state : {
-        Portfolios : {}
+        profil : {
+            name : sessionStorage.getItem('nickname'),
+            email : sessionStorage.getItem('email'),
+            password : sessionStorage.getItem('password'),
+            date : sessionStorage.getItem('date')
+        }
     },
-    fetchPortfolis() {
-        this.axios.get('/JSON/PORTFOLIO.json')
+    mutations: {
+        [Constant.PROFIL_FETCH] : (state, payload) => {
+            if(payload.email != "") {
+                state.sign = payload;
+            }
+        }
     }
 })
 

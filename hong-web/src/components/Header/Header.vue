@@ -1,46 +1,29 @@
 <template>
 	<div :class="$style.header">
+		<MobildMenu />
 		<ul :class="$style.menu">
 			<li>
-				<router-link :to="{name:'Introduce'}">Introduce</router-link>
+				<router-link :to="{name:'Portfolio'}">Portfolio</router-link>
 			</li>
 			<li>
-				<router-link :to="{name:'Portfolio'}">Portfolio</router-link>
+				<router-link :to="{name:'Board'}">Board</router-link>
 			</li>
 			<li>
 				<router-link :to="{name:'QnA'}">QnA</router-link>
 			</li>
 		</ul>
-		<div :class="$style.mobileBtn" @click="btnOn">
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-		<div :class="$style.mobildMenu">
-			<ul :class="$style.list">
-				<li>
-					<router-link :to="{name:'Introduce'}">Introduce</router-link>
-				</li>
-				<li>
-					<router-link :to="{name:'Portfolio'}">Portfolio</router-link>
-				</li>
-				<li>
-					<router-link :to="{name:'QnA'}">QnA</router-link>
-				</li>
-			</ul>
-		</div>
-		<router-link :class="$style.logo" :to="{name:'Home'}">
-			<img src="/img/com/logo_white.png" alt="LOGO">
-		</router-link>
+		<h1 @click="Navigate('Home')" :class="$style.logo">
+			<img src="/img/com/logo_white_40.png" alt="LOGO">
+		</h1>
 		<ul :class="$style.sign">
 			<li>
-				<span v-if="!signCurrent" @click.prevent="SignPopOpen('in')">Sign In</span>
-				<span v-if="signCurrent">Test</span>
+				<span v-if="!signCurrent" @click.prevent="SignPopOpen('in')">Sign in</span>
+				<router-link v-if="signCurrent" :to="'Mypage/'+nickname">{{nickname}}</router-link>
 			</li>
 			<li>
-				<span v-if="!signCurrent" @click.prevent="SignPopOpen('up')">Sign Up</span>
+				<span v-if="!signCurrent" @click.prevent="SignPopOpen('up')">Sign up</span>
 				<form v-if="signCurrent" action="/_SIGN/SIGN_OUT.php" method="post">
-					<input type="submit" value="Sign Out">
+					<input type="submit" value="Sign out">
 				</form>
 			</li>
 		</ul>
@@ -54,7 +37,7 @@
 							<td>
 								<input type="text" v-model="email" name="email">
 								<span>@</span>
-								<select name="email_back">
+								<select name="email_back" v-model="email_back">
 									<option value="naver.com">naver.com</option>
 									<option value="hanmail.net">hanmail.net</option>
 								</select>
@@ -118,19 +101,26 @@
 
 <script>
 	import VueRouter from 'vue-router';
+	import Constant from '../../Constant';
+
+	import MobildMenu from './MobileMenu';
 
 	export default {
 		name: 'Header',
 		props : ["signCurrent"],
+		components : {
+			MobildMenu
+		},
 		data () {
 			return {
 				pop : false,
 				up : true,
 				email : '',
+				email_back : 'naver.com',
 				password : '',
 				password_check : '',
 				nickname : '',
-				nicknameList : {},
+				nicknameList : [],
 				Error : {
 					email : {value : 'e-mail을 입력해주세요.', current : true},
 					password : {value : '비밀번호를 입력해주세요.', current : true},
@@ -141,25 +131,72 @@
 			}
 		},
 		mounted : function() {
-			this.$axios.get('http://hong-web.com/_SIGN/NAME_API.php').then((response) => {
+			this.$axios.get('/_SIGN/SIGN_API.php').then((response) => {
 				this.nicknameList = response.data;
 			});
+
+			if(window.sessionStorage.length !== 0) {
+				this.nickname = this.$store.state.profil.name;
+			}
 		},
 		watch : {
 			email : function(v){
-				var KeyCode = /[~!@\#$%^&*\()\-=+'ㄱ-ㅎ]/g;
+				var KeyCode = /[~!@\#$%^&*\()\=+'ㄱ-ㅎ]/g;
 				var KeyCodeCheck = KeyCode.test(v);
+
+				var overlap = false;
+				var back = '@' + this.email_back
+
+				this.email = v.trim();
+				this.nicknameList.map(function(i){
+					if(i.email == v.trim() + back) {
+						overlap = true;
+					}
+				});
 
 				if(!KeyCodeCheck) {
 					if(v.trim() == "") {
 						this.Error.email.current = true;
-					this.Error.email.value = 'e-mail을 입력해주세요.';
+						this.Error.email.value = 'e-mail을 입력해주세요.';
 					} else {
-						this.Error.email.current = false;
+						if(v.trim().length >= 5 && v.trim().length <= 20) {
+							if(!overlap) {
+								this.Error.email.current = false;
+							} else {
+								this.Error.email.current = true;
+								this.Error.email.value = '중복되는 email이 있습니다.';
+							}
+						} else {
+							this.Error.email.current = true;
+							this.Error.email.value = '올바른 형식이 아닙니다.';
+						}
 					}
 				}else{
 					this.Error.email.current = true;
 					this.Error.email.value = '올바른 형식이 아닙니다.';
+				}
+			},
+			email_back : function(v){
+				var overlap = false;
+				var front = this.email;
+
+				this.email_back = v;
+				this.nicknameList.map(function(i){
+					if(i.email == front + '@' + v) {
+						overlap = true;
+					}
+				});
+
+				if(front.trim() != "") {
+					if(!overlap) {
+						this.Error.email.current = false;
+					} else {
+						this.Error.email.current = true;
+						this.Error.email.value = '중복되는 email이 있습니다.';
+					}
+				} else {
+					this.Error.email.current = true;
+					this.Error.email.value = 'e-mail을 입력해주세요.';
 				}
 			},
 			password : function(v){
@@ -216,8 +253,8 @@
 			}
 		},
 		methods : {
-			btnOn : function(e){
-				console.log(e);
+			Navigate(component) {
+				this.$router.push({name : component});
 			},
 			SignPopOpen : function(type) {
 				this.pop = true;
@@ -270,7 +307,7 @@
 </script>
 
 <style module>
-	.header {position:fixed; left:0; top:0; background-color:#222; width:100%; height:55px; color:#fff; z-index:10;}
+	.header {position:fixed; left:0; top:0; background-color:#222; width:100%; height:55px; color:#fff; z-index:100;}
 	.header .logo {display:block; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%);}
 	.header .logo img {width:40px; display:block;}
 
@@ -282,21 +319,21 @@
 	.header .menu>li:last-child {margin-right:0; padding-right:0;}
 	.header .menu>li:last-child:after {display:none;}
 
-	.header .mobileBtn {display:none;}
-	.header .mobildMenu {display:none;}
-
 	.header .sign {float:right; overflow:hidden; margin-right:40px;}
-	.header .sign>li {float:left; line-height:55px; margin-left:20px; padding-left:20px; position:relative; letter-spacing:1.5px;}
-	.header .sign>li>span {color:#fff; font-size:18px; cursor:pointer;}
+	.header .sign>li {float:left; line-height:55px; margin-left:20px; padding-left:20px; position:relative; letter-spacing:1.5px; font-size:18px;}
+	.header .sign>li>span {color:#fff; cursor:pointer;}
 	.header .sign>li>span:hover {text-decoration:underline;}
+	.header .sign>li form {display:block;}
 	.header .sign>li input {color:#fff; font-size:18px; cursor:pointer; background-color:transparent; border:0;}
 	.header .sign>li input:hover {text-decoration:underline;}
-	.header .sign>li:after {content:""; position:absolute; display:block; height:18px; width:1px; background-color:#fff; left:0; top:50%; transform:translateY(-50%);}
+	.header .sign>li>a {color:#fff; font-size:18px; cursor:pointer; background-color:transparent; border:0;}
+	.header .sign>li>a:hover {text-decoration:underline;}
+	.header .sign>li:before {content:""; position:absolute; display:block; height:18px; width:1px; background-color:#fff; left:0; top:50%; transform:translateY(-50%);}
 	.header .sign>li:first-child {margin-left:0; padding-left:0;}
-	.header .sign>li:first-child:after {display:none;}
+	.header .sign>li:first-child:before {display:none;}
 
 	.header .signPop {position:fixed; width:100%; height:100%; background-color:rgba(2,2,2,0.8);}
-	.header .signPop div {width:600px; height:auto; background-color:#fff; border-radius:5%; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); color:#222; padding:20px; box-sizing:border-box;}
+	.header .signPop div {width:600px; height:auto; background-color:#fff; border-radius:10px; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); color:#222; padding:20px; box-sizing:border-box;}
 	.header .signPop div>h2 {text-align:center; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid #222;}
 	.header .signPop div form {width:100%; text-align:center; overflow:hidden;}
 	.header .signPop div form table {text-align:left; width:100%; margin-bottom:10px;}
@@ -318,31 +355,25 @@
 
 		.header .menu {display:none;}
 
-		.header .mobileBtn {display:block; position:absolute; left:5vw; top:50%; transform:translateY(-50%); border:2px solid #fff; width:8vw; height:8vw; border-radius:1vw; box-sizing:border-box;}
-		.header .mobileBtn span {width:70%; height:13%; background-color:#fff; position:absolute; left:50%; transform-origin:center;}
-		.header .mobileBtn span:nth-child(1) {top:50%; transform:translate(-50%, 170%);}
-		.header .mobileBtn span:nth-child(2) {top:50%; transform:translate(-50%, -50%);}
-		.header .mobileBtn span:nth-child(3) {top:50%; transform:translate(-50%, -270%);}
-		.header .mobildMenu {position:fixed; display:none; left:0; top:0; width:100%; height:100%; background-color:#222;}
-
 		.header .sign {margin-right:5vw;}
-		.header .sign>li {line-height:13vw; margin-left:1.5vw; padding-left:2vw;}
-		.header .sign>li>span {font-size:3vw;}
-		.header .sign>li input {font-size:3vw;}
+		.header .sign>li {line-height:13vw; margin-left:1.5vw; padding-left:2vw; font-size:3.5vw;}
+		.header .sign>li>a {font-size:3.5vw;}
+		.header .sign>li input {font-size:3.5vw; padding:0;}
 		.header .sign>li:after {height:3vw;}
 
 		.header .signPop div {width:90vw; padding:2.5vw;}
 		.header .signPop div>h2 {margin-bottom:1.5vw; padding-bottom:1.5vw;}
 		.header .signPop div form table {text-align:left; width:100%; margin-bottom:1.5vw;}
-		.header .signPop div form table tr th {width:23%; padding-right:1.875vw; font-size:2.3vw;}
+		.header .signPop div form table tr th {width:28%; padding-right:1.875vw; font-size:3vw;}
 		.header .signPop div form table tr td {padding-bottom:1.5vw;}
 		.header .signPop div form table tr td input {border-radius:0.8vw; font-size:3vw; height:8vw; line-height:8vw;}
 		.header .signPop div form table tr td i {font-size:2vw;}
 		.header .signPop div.signup form table tr:first-child td input {width:40%;}
-		.header .signPop div.signup form table tr:first-child td span {width:5%; font-size:3vw;}
+		.header .signPop div.signup form table tr:first-child td span {width:7%; font-size:3vw;}
 		.header .signPop div.signup form table tr:first-child td select {width:50%; border-radius:0.8vw; font-size:3vw; height:8vw; line-height:8vw;}
-		.header .signPop div form>input.cancel {height:12vw; line-height:5vw; border-radius:0.8vw; font-size:5vw;}
-		.header .signPop div form>input.submit {height:12vw; border-radius:0.8vw; margin-bottom:1.5vw; font-size:5vw;}
+		.header .signPop div form>input {height:10vw; border-radius:0.8vw; font-size:3.5vw;}
+		.header .signPop div form>input.cancel {line-height:5vw;}
+		.header .signPop div form>input.submit {margin-bottom:1.5vw;}
 		.header .signPop div ul {margin-top:2.5vw; padding-top:1.5vw; margin-bottom:2vw;}
 		.header .signPop div ul li {font-size:3vw;}
 	}

@@ -32,6 +32,6 @@
 		.footer {padding:2.5vw 0;}
 		.footer>div {padding:0 5vw;}
 		.footer>div ul {width:100%;}
-		.footer>div ul li {font-size:5vw;}
+		.footer>div ul li {font-size:3vw;}
 	}
 </style>

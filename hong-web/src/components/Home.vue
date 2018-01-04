@@ -60,15 +60,21 @@
 <script>
     export default {
         name : 'Home',
-		props : ['portfolios'],
+		props : ['portfolios', 'signCurrent'],
         data : function() {
             return {
                 TechAry : [
                     {name : "CSS", details : ["CSS3", "SCSS"]},
                     {name : "HTML", details : ["HTML5"]},
                     {name : "JavaScript", details : ["jQuery", "Vue.js", "React.js"]}
-				]
+				],
+				portfolios : {}
             }
+		},
+		mounted : function() {
+			this.$axios.get('/JSON/PORTFOLIO.json').then((response) => {
+				this.portfolios = response.data;
+			});
 		}
     }
 </script>
@@ -121,6 +127,7 @@
 	.contact>p>span {font-size:35px; position:absolute; display:block; left:50%; top:50%; transform:translate(-50%, -50%); color:#fff;}
 
 	@media screen and (max-width:800px) {
+		.tech {display:none;}
 		.tech .techbox h1 {margin-top:3.75vw;}
 		.tech .techbox ul {padding:0;}
 		.tech .techbox ul li {margin-bottom:12.5vw;}
@@ -128,7 +135,7 @@
 		.tech .techbox ul li span {display:block; width:8.75vw; height:8.75vw; line-height:8.75vw;}
 
 		.board {margin:12.5vw 0;}
-		.board .box {width:90vw; padding:3.75vw 0;}
+		.board .box {width:90vw; padding:3.75vw 0; border-top:0;}
 		.board .box p {font-size:4vw;}
 		.board .techBg {margin-top:3.75vw; min-height:25vw; line-height:25vw; font-size:3.125vw;}
 

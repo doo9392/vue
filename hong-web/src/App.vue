@@ -1,35 +1,36 @@
 <template>
 	<div id="app" class="ftJF">
 		<Header :signCurrent="signCurrent" />
-		<router-view :portfolios="portfolios" :signCurrent="signCurrent" :class="$style.container" />
+		<router-view :signCurrent="signCurrent" :class="$style.container" />
 		<Footer />
 	</div>
 </template>
 
 <script>
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import Footer from './components/Footer';
+import Constant from './Constant';
 
 export default {
 	name: 'app',
 	data : function() {
 		return {
-			portfolios : {},
 			signCurrent : false
 		}
 	},
 	components: {
 		Header, Footer
 	},
-
+	computed : {
+		sign() {
+			return this.$store.state.sign;
+		}
+	},
     mounted : function(){
-        this.$axios.get('/JSON/PORTFOLIO.json').then((response) => {
-            this.portfolios = response.data;
-		});
-		var Cookie = document.cookie;
-
-		if(Cookie.indexOf('PHPSESSID') != -1) {
+		if(window.sessionStorage.length !== 0) {
 			this.signCurrent = true;
+
+			this.$store.commit(Constant.SIGN_FETCH, this.signCurrent);
 		} else {
 			this.signCurrent = false;
 		}
