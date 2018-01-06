@@ -1,7 +1,7 @@
 <template>
 	<div id="app" class="ftJF">
-		<Header :signCurrent="signCurrent" />
-		<router-view :signCurrent="signCurrent" :class="$style.container" />
+		<Header  />
+		<router-view :class="$style.container" />
 		<Footer />
 	</div>
 </template>

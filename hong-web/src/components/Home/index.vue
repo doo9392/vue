@@ -2,7 +2,7 @@
 	<div :class="$style.home">
 		<Intro />
 		<Board />
-		<Portfolio />
+		<!-- <Portfolio /> -->
 	</div>
 </template>
 
@@ -13,7 +13,6 @@
 
     export default {
         name : 'Home',
-		props : ['signCurrent'],
 		components : {Intro, Portfolio, Board}
     }
 </script>
