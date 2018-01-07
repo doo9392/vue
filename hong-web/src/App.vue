@@ -1,6 +1,6 @@
 <template>
 	<div id="app" class="ftJF">
-		<Header  />
+		<!-- <Header  /> -->
 		<router-view :class="$style.container" />
 		<Footer />
 	</div>
@@ -27,6 +27,7 @@ export default {
 		}
 	},
     mounted : function(){
+		console.log(window.outerWidth)
 		if(window.sessionStorage.length !== 0) {
 			this.signCurrent = true;
 
