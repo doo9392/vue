@@ -1,37 +1,38 @@
 <template>
 	<div id="app" class="ftJF">
-		<!-- <Header  /> -->
-		<router-view :class="$style.container" />
-		<Footer />
+		<Header v-if="!mobileCheck" />
+		<router-view :class="$style.container" v-if="!mobileCheck" />
+		<Footer v-if="!mobileCheck" />
+		<Mobile v-if="mobileCheck" />
 	</div>
 </template>
 
 <script>
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Constant from './Constant';
+import Footer from './components/Footer'
+import Mobile from './components/Mobile'
 
 export default {
 	name: 'app',
 	data : function() {
 		return {
-			signCurrent : false
+			signCurrent : false,
+			mobileCheck : false
 		}
 	},
 	components: {
-		Header, Footer
-	},
-	computed : {
-		sign() {
-			return this.$store.state.sign;
-		}
+		Header, Footer, Mobile
 	},
     mounted : function(){
-		console.log(window.outerWidth)
+		if(window.outerWidth <= 800) {
+			this.mobileCheck = true;
+		}
+
 		if(window.sessionStorage.length !== 0) {
 			this.signCurrent = true;
 
-			this.$store.commit(Constant.SIGN_FETCH, this.signCurrent);
+			this.$store.commit(Constant.SIGN_CHECK, this.signCurrent);
 		} else {
 			this.signCurrent = false;
 		}
@@ -40,10 +41,10 @@ export default {
 </script>
 
 <style module>
-	.container {margin-top:55px;}
+	.container {margin-top:125px;}
 
 	@media screen and (max-width:800px) {
-		.container {margin-top:13vw;}
+		.container {margin-top:20vw;}
 	}
 </style>
 

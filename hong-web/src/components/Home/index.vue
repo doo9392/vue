@@ -2,7 +2,7 @@
 	<div :class="$style.home">
 		<Intro />
 		<Board />
-		<!-- <Portfolio /> -->
+		<Portfolio />
 	</div>
 </template>
 

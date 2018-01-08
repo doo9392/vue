@@ -1,6 +1,6 @@
 <template>
-	<div :class="$style.signPop" v-if="this.pop">
-		<div v-if="SignType='up'" :class="$style.signup">
+	<div :class="$style.signPop" v-if="pop">
+		<div v-if="type=='up'" :class="$style.signup">
 			<h2>Sign Up</h2>
 			<form action="/_SIGN/SIGN_UP.php" method="post" @submit="UpSubmit">
 				<table>
@@ -46,7 +46,7 @@
 				<li>e-mail은 답변 및 공지 전달에만 사용됩니다.</li>
 			</ul>
 		</div>
-		<div v-if="SignType='in'">
+		<div v-if="type=='in'">
 			<h2>Sign In</h2>
 			<form action="/_SIGN/SIGN_IN.php" method="post">
 				<table>
@@ -71,13 +71,18 @@
 </template>
 
 <script>
-	import Constant from '../../Constant';
+	import VueRouter from 'vue-router';
+	import EventBus from '../../EventBus';
 
 	export default {
 		name: 'SignPop',
-		props : ['pop', 'SignType'],
+		created : function() {
+			EventBus.$on('Sign-Pop', this.popOpen);
+		},
 		data () {
 			return {
+				pop : false,
+				type : '',
 				email : '',
 				email_back : 'naver.com',
 				password : '',
@@ -96,6 +101,10 @@
 			this.$axios.get('/_SIGN/SIGN_API.php').then((response) => {
 				this.nicknameList = response.data;
 			});
+
+			if(window.sessionStorage.length !== 0) {
+				this.nickname = this.$store.state.profil.name;
+			}
 		},
 		watch : {
 			email : function(v){
@@ -211,6 +220,10 @@
 			}
 		},
 		methods : {
+			popOpen : function(type) {
+				this.type = type;
+				this.pop = true;
+			},
 			SignPopClose : function() {
 				this.pop = false;
 				this.email = '';

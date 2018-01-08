@@ -10,6 +10,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state : {
+        signCurrent : false,
         profil : {
             name : sessionStorage.getItem('nickname'),
             email : sessionStorage.getItem('email'),
@@ -18,12 +19,10 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
-        [Constant.PROFIL_FETCH] : (state, payload) => {
-            if(payload.email != "") {
-                state.sign = payload;
-            }
+        [Constant.SIGN_CHECK] : (state, payload) => {
+            state.signCurrent = payload;
         }
     }
-})
+});
 
 export default store;

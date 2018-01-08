@@ -1,3 +1,3 @@
 export default {
-    PROFIL_FETCH : "profilFetch"
+    SIGN_CHECK : "signCheck"
 };
