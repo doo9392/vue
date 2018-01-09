@@ -24,7 +24,9 @@
     export default {
         name : 'Insert',
         data() {
-            imgName : ''
+            return {
+                imgName : ''
+            }
         },
         methods : {
             ImgInsert(event) {
@@ -35,7 +37,7 @@
 </script>
 
 <style module>
-    .insert {width:800px; margin:0 auto; overflow:hidden; border-bottom:1px solid #dedede; padding-bottom:50px;}
+    .insert {width:800px; margin:0 auto; overflow:hidden; border-bottom:1px solid #dedede; padding-bottom:30px;}
     .insert .postArea {width:100%;}
     .insert .postArea>form {width:100%; overflow:hidden;}
     .insert .postArea>form>textarea {width:100%; height:130px; border-radius:5px; display:block; margin-bottom:15px;}
@@ -49,5 +51,9 @@
     .insert .postArea>form>.btn {float:right; width:10%; cursor:pointer; border-radius:5px; height:44px;}
 
     @media screen and (max-width:800px) {
+        .insert {width:90%; border-bottom:0; padding-bottom:0;}
+        .insert .postArea>form>textarea {height:16.25vw; border-radius:0.5vw; margin-bottom:3vw;}
+        .insert .postArea>form .insetimg .imgbtn {padding:0.8vw; border-radius:0.5vw;}
+        .insert .postArea>form>.btn {float:right; width:10%; border-radius:0.5vw; height:5.5vw;}
     }
 </style>

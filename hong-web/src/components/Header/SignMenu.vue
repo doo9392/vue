@@ -41,15 +41,15 @@
 
 <style module>
 	.sign {float:right; overflow:hidden; margin-right:30px;}
-	.sign>li {float:left; line-height:35px; margin-left:20px; padding-left:20px; position:relative; letter-spacing:1.5px; font-size:15px;}
+	.sign>li {float:left; line-height:40px; margin-left:20px; padding-left:20px; position:relative; letter-spacing:1.5px; font-size:15px;}
 	.sign>li>span {color:#fff; cursor:pointer;}
 	.sign>li>span:hover {text-decoration:underline;}
 	.sign>li form {display:block;}
-	.sign>li input {color:#fff; font-size:18px; cursor:pointer; background-color:transparent; border:0;}
+	.sign>li input {color:#fff; cursor:pointer; background-color:transparent; border:0;}
 	.sign>li input:hover {text-decoration:underline;}
-	.sign>li>a {color:#fff; font-size:18px; cursor:pointer; background-color:transparent; border:0;}
+	.sign>li>a {color:#fff; cursor:pointer; background-color:transparent; border:0;}
 	.sign>li>a:hover {text-decoration:underline;}
-	.sign>li:before {content:""; position:absolute; display:block; height:18px; width:1px; background-color:#fff; left:0; top:50%; transform:translateY(-50%);}
+	.sign>li:before {content:""; position:absolute; display:block; height:18px; width:1.1px; background-color:#fff; left:0; top:50%; transform:translateY(-50%);}
 	.sign>li:first-child {margin-left:0; padding-left:0;}
 	.sign>li:first-child:before {display:none;}
 </style>

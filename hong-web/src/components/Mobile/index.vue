@@ -1,9 +1,14 @@
 <template>
     <div :class="$style.mobileHome">
-        <div :class="$style.view">
-            <Home :class="$style.com" />
-            <Portfolo :class="$style.com" />
-        </div>
+        <MobileHeader />
+        <ul :class="$style.view">
+            <li>
+                <BoardInsert :class="$style.com" />
+            </li>
+            <li>
+                <Portfolo :class="$style.com" />
+            </li>
+        </ul>
         <div :class="$style.menu">
             <MobileMenu />
         </div>
@@ -11,21 +16,22 @@
 </template>
 
 <script>
-    import Home from '../Home';
+    import MobileHeader from './MobileHeader';
+    import BoardInsert from '../Board/Insert';
     import Portfolo from '../Portfolio';
     import MobileMenu from './MobileMenu';
 
     export default {
         name : 'Mobile',
         components : {
-            Home, Portfolo, MobileMenu
+            MobileHeader, BoardInsert, Portfolo, MobileMenu
         }
     }
 </script>
 
 <style module>
-    .mobileHome {}
-    .mobileHome .view {overflow:hidden; width:500%;}
-    .mobileHome .view>.com {float:left; width:20%;}
+    .mobileHome {height:100vh; overflow:hidden;}
+    .mobileHome .view {overflow:hidden; width:200%; padding-top:9vw;}
+    .mobileHome .view>li {float:left; width:50%;}
     .mobileHome .menu {}
 </style>

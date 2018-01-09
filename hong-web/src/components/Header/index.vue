@@ -4,7 +4,7 @@
 			<Sns />
 			<SignMenu :profil="profil" :signCurrent="signCurrent" />
 		</div>
-		<h1 @click="Navigate('Home')" :class="$style.logo">
+		<h1 @click="Navigate()" :class="$style.logo">
 			<img src="/img/com/logo_white_40.png" alt="LOGO">
 		</h1>
 		<SignPop />
@@ -48,7 +48,7 @@
 		},
 		methods : {
 			Navigate(component) {
-				this.$router.push({name : component});
+				this.$router.push({name : 'Home'});
 			}
 		}
 	}

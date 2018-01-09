@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        name : 'HomeBoard',
+        name : 'HomeBoard'
     }
 </script>
 

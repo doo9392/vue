@@ -1,3 +1,4 @@
 export default {
-    SIGN_CHECK : "signCheck"
+    SIGN_CHECK : "signCheck",
+    PORTFOLIOS_FETCH : "portfoliosFetch"
 };

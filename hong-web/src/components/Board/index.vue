@@ -4,16 +4,18 @@
             HONG-WEB
         </div>
         <Insert />
+        <BoardList />
     </div>
 </template>
 
 <script>
     import Insert from './Insert';
+    import BoardList from './BoardList';
 
     export default {
         name : 'Board',
         components : {
-            Insert
+            Insert, BoardList
         }
     }
 </script>

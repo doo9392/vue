@@ -263,7 +263,7 @@
 </script>
 
 <style module>
-	.signPop {position:fixed; width:100%; height:100%; background-color:rgba(2,2,2,0.8);}
+	.signPop {position:fixed; width:100%; height:100%; background-color:rgba(2,2,2,0.8); top:0; z-index:10;}
 	.signPop div {width:600px; height:auto; background-color:#fff; border-radius:10px; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); color:#222; padding:20px; box-sizing:border-box;}
 	.signPop div>h2 {text-align:center; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid #222;}
 	.signPop div form {width:100%; text-align:center; overflow:hidden;}

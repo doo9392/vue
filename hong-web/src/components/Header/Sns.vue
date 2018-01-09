@@ -20,7 +20,7 @@
 
 <style module>
 	.sns {overflow:hidden; float:left; margin-left:30px;}
-	.sns>li {float:left; line-height:35px; margin-right:20px; padding-right:20px; position:relative; letter-spacing:1.5px;}
+	.sns>li {float:left; line-height:40px; margin-right:20px; padding-right:20px; position:relative; letter-spacing:1.5px;}
 	.sns>li>a {color:#fff; font-size:15px;}
 	.sns>li>a:hover {text-decoration:underline;}
 	.sns>li:after {content:""; position:absolute; display:block; height:18px; width:1px; background-color:#fff; right:0; top:50%; transform:translateY(-50%);}

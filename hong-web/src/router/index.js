@@ -10,7 +10,7 @@ import NotFound from '../components/NotFound'
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
 	mode : 'history',
 	routes: [
 		{path : '/', name : 'Home', component : Home},
@@ -33,3 +33,5 @@ export default new Router({
 		{path : '*', name : 'NotFound', component : NotFound},
 	]
 });
+
+export default router;
