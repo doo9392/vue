@@ -18,7 +18,7 @@
             }
         },
         created : function() {
-            this.$axios.get('http://www.hong-web.com/JSON/PORTFOLIO.json').then((response) => {
+            this.$axios.get('/JSON/PORTFOLIO.json').then((response) => {
                 this.portfolios = response.data;
             });
         }

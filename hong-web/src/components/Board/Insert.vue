@@ -51,9 +51,10 @@
     .insert .postArea>form>.btn {float:right; width:10%; cursor:pointer; border-radius:5px; height:44px;}
 
     @media screen and (max-width:800px) {
-        .insert {width:90%; border-bottom:0; padding-bottom:0;}
-        .insert .postArea>form>textarea {height:16.25vw; border-radius:0.5vw; margin-bottom:3vw;}
-        .insert .postArea>form .insetimg .imgbtn {padding:0.8vw; border-radius:0.5vw;}
-        .insert .postArea>form>.btn {float:right; width:10%; border-radius:0.5vw; height:5.5vw;}
+        .insert {width:90%; border-bottom:0; padding-bottom:0; padding:3vw 0;}
+        .insert .postArea>form>textarea {height:30vw; border-radius:1vw; margin-bottom:3vw;}
+        .insert .postArea>form .insetimg {width:70vw;}
+        .insert .postArea>form .insetimg .imgbtn {padding:0.8vw; border-radius:1vw; width:10vw; height:10vw; box-sizing:border-box;}
+        .insert .postArea>form>.btn {float:right; width:18vw; border-radius:1vw; height:10vw; font-size:4vw;}
     }
 </style>

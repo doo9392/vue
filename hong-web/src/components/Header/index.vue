@@ -5,9 +5,9 @@
 			<SignMenu :profil="profil" :signCurrent="signCurrent" />
 		</div>
 		<h1 @click="Navigate()" :class="$style.logo">
-			<img src="/img/com/logo_white_40.png" alt="LOGO">
+			<img src="/img/com/logo.png" alt="LOGO">
 		</h1>
-		<SignPop />
+		<SignPop :MobilePop="false" />
 		<Menu />
 		<div :class="$style.bot">
 			모바일 최적화 크기입니다. 새로고침을 해주세요.
@@ -55,9 +55,9 @@
 </script>
 
 <style module>
-	.header {position:fixed; left:0; top:0; background-color:#2f2f2f; width:100%; height:auto; color:#fff; z-index:100;}
+	.header {position:fixed; left:0; top:0; background-color:#fff; width:100%; height:auto; z-index:100;}
 	.header .top {overflow:hidden; background-color:#222;}
-	.header .logo {display:block; width:40px; margin:10px auto; cursor:pointer;}
+	.header .logo {display:block; width:150px; margin:10px auto; cursor:pointer;}
 	.header .logo img {width:100%; display:block;}
 
 	.header .bot {text-align:center; transition:height 0.3s; overflow:hidden; height:0; line-height:30px;}

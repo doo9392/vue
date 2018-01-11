@@ -38,13 +38,13 @@
 </script>
 
 <style module>
-	.menu {position:relative;}
+	.menu {position:relative; border-bottom:1px solid #ddd;}
 	.menu>ul {text-align:center;}
 	.menu>ul>li {display:inline-block; margin-right:30px; line-height:30px;}
-	.menu>ul>li>a {color:#fff; font-size:18px;}
+	.menu>ul>li>a {color:000; font-size:18px;}
 	.menu>ul>li a:hover {text-decoration:underline;}
 	.menu>ul>li:last-child {margin-right:0; padding-right:0;}
-	.menu>ul>li>ul {position:absolute; left:0; right:0; top:30px; background-color:#2f2f2f; border-top:1px solid #222; overflow:hidden; height:0; box-sizing:border-box; transition:all 0.3s;}
+	.menu>ul>li>ul {position:absolute; left:0; right:0; top:31px; background-color:#2f2f2f; overflow:hidden; height:0;  transition:all 0.3s;}
 	.menu>ul>li>ul>li {display:inline-block; line-height:35px; margin-left:20px; font-size:16px;}
 	.menu>ul>li>ul>li>a {color:#fff;}
 	.menu>ul>li>ul>li:first-child {margin-left:0;}

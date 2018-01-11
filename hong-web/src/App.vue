@@ -41,14 +41,16 @@ export default {
 </script>
 
 <style module>
-	.container {margin-top:125px;}
-
-	@media screen and (max-width:800px) {
-		.container {margin-top:20vw;}
-	}
+	.container {margin-top:140px;}
 </style>
 
 <style>
+	@media screen and (max-width:800px) {
+		body {height:100%;}
+
+		#app {height:100%; overflow:hidden;}
+	}
+
 	@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 	@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
