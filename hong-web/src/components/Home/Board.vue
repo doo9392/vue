@@ -6,7 +6,7 @@
                 <li v-for="(c, index) in Boards" v-if="index <= 8">
                     <BoardDetailThumb :file="c.file" />
                     <div :class="$style.info">
-                        <router-link :to="'Mypage/'+c.name">
+                        <router-link :to="{name:'Profil', params:{name:c.name}}">
                             {{c.name}}
                         </router-link>
                         <span :class="$style.date">

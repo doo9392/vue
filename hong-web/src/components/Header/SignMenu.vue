@@ -2,7 +2,7 @@
     <ul :class="$style.sign">
         <li>
             <span v-if="!signCurrent" @click.prevent="SignPopOpen('in')">Sign in</span>
-            <router-link v-if="signCurrent" :to="'Mypage/'+nickname">{{nickname}}</router-link>
+            <router-link v-if="signCurrent" :to="{name:'Profil', params:{name:nickname}}">{{nickname}}</router-link>
         </li>
         <li>
             <span v-if="!signCurrent" @click.prevent="SignPopOpen('up')">Sign up</span>

@@ -4,16 +4,18 @@
             HONG-WEB
         </div>
         <PortfolioList />
+        <Footer />
 	</div>
 </template>
 
 <script>
     import PortfolioList from './PortfolioList';
+	import Footer from '../Footer';
 
     export default {
         name : 'Portfolio',
         components : {
-            PortfolioList
+            PortfolioList, Footer
         }
     }
 </script>

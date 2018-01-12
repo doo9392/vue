@@ -2,7 +2,6 @@
 	<div id="app" class="ftJF">
 		<Header v-if="!mobileCheck" />
 		<router-view :class="$style.container" v-if="!mobileCheck" />
-		<Footer v-if="!mobileCheck" />
 		<Mobile v-if="mobileCheck" />
 	</div>
 </template>
@@ -10,8 +9,7 @@
 <script>
 import Header from './components/Header';
 import Constant from './Constant';
-import Footer from './components/Footer'
-import Mobile from './components/Mobile'
+import Mobile from './components/Mobile';
 
 export default {
 	name: 'app',
@@ -22,7 +20,7 @@ export default {
 		}
 	},
 	components: {
-		Header, Footer, Mobile
+		Header, Mobile
 	},
     mounted : function(){
 		if(window.outerWidth <= 800) {

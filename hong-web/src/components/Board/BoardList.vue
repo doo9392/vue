@@ -3,7 +3,7 @@
         <ul>
             <li v-for="(c, index) in Boards" v-if="index <= Count">
                 <div :class="$style.info">
-                    <router-link :to="'Mypage/'+c.name">
+                    <router-link :to="{name:'Profil', params:{name:c.name}}">
                         {{c.name}}
                     </router-link>
                     <span :class="$style.date">

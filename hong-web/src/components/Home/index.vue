@@ -3,6 +3,7 @@
 		<Intro />
 		<Board />
 		<Portfolio />
+		<Footer />
 	</div>
 </template>
 
@@ -10,10 +11,11 @@
 	import Intro from './Intro';
 	import Board from './Board';
 	import Portfolio from './Portfolio';
+	import Footer from '../Footer';
 
     export default {
         name : 'Home',
-		components : {Intro, Portfolio, Board}
+		components : {Intro, Portfolio, Board, Footer}
     }
 </script>
 
